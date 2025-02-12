@@ -40,7 +40,7 @@ if "%1"=="setup-interactive" goto setup-interactive
 goto end
 
 :build
-docker build %DOCKER_DIR% -f %DOCKER_DIR%Dockerfile.base -t %IMAGE%
+docker build %DOCKER_DIR% -f %DOCKER_DIR%Dockerfile -t %IMAGE%
 goto end
 
 :run
