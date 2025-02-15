@@ -38,7 +38,7 @@ run:
 		-e LD_LIBRARY_PATH=/usr/lib/wsl/lib \
 		-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
 		-v /dev:/dev:rw \
-		-v ${PROJECT_DIR}/projects/devel:/${USERNAME}/repositories:rw \
+		-v ${PROJECT_DIR}/projects/devel:/${USERNAME}/ros2_ws:rw \
 		-v ${PROJECT_DIR}:/${USERNAME}/container:rw \
 		-d -it ${IMAGE} 1>/dev/null
 

@@ -1,0 +1,281 @@
+<sdf version="1.7">
+  <model name="bandit">
+    <link name="base_link">
+      <inertial>
+        <pose>0.000114 -0.017135 -0.07437 0 -0 0</pose>
+        <mass>1</mass>
+        <inertia>
+          <ixx>0.00032834</ixx>
+          <ixy>-6.6555e-07</ixy>
+          <ixz>-7.1531e-06</ixz>
+          <iyy>0.00044768</iyy>
+          <iyz>9.9574e-06</iyz>
+          <izz>0.00030403</izz>
+        </inertia>
+      </inertial>
+      <collision name="base_link_collision">
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://bandit/meshes/visual/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="base_link_visual">
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://bandit/meshes/visual/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="tofl" type="revolute">
+      <pose relative_to="base_link">0.07 -0.004 -0.182 1.5708 -0 0</pose>
+      <parent>base_link</parent>
+      <child>wheel_fl</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="wheel_fl">
+      <pose relative_to="tofl">0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.019773 0 0 0 -0 0</pose>
+        <mass>0.095633</mass>
+        <inertia>
+          <ixx>5.1131e-05</ixx>
+          <ixy>2.4719e-23</ixy>
+          <ixz>5.4603e-22</ixz>
+          <iyy>3.8578e-05</iyy>
+          <iyz>1.6462e-38</iyz>
+          <izz>3.8578e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name="wheel_fl_collision">
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://bandit/meshes/visual/wheel_fl.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="wheel_fl_visual">
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://bandit/meshes/visual/wheel_fl.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="tofr" type="revolute">
+      <pose relative_to="base_link">-0.07 -0.004 -0.182 -1.5708 0 -3.14159</pose>
+      <parent>base_link</parent>
+      <child>wheel_fr</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="wheel_fr">
+      <pose relative_to="tofr">0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.019773 0 0 0 -0 0</pose>
+        <mass>0.095633</mass>
+        <inertia>
+          <ixx>5.1131e-05</ixx>
+          <ixy>2.4719e-23</ixy>
+          <ixz>5.4603e-22</ixz>
+          <iyy>3.8578e-05</iyy>
+          <iyz>1.6462e-38</iyz>
+          <izz>3.8578e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name="wheel_fr_collision">
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://bandit/meshes/visual/wheel_fr.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="wheel_fr_visual">
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://bandit/meshes/visual/wheel_fr.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="tolidar" type="fixed">
+      <pose relative_to="base_link">0 -0.059 -0.065 -3.14159 0 0</pose>
+      <parent>base_link</parent>
+      <child>lidar</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="lidar">
+      <pose relative_to="tolidar">0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0.019273 -0.000246 0 -0 0</pose>
+        <mass>0.170619</mass>
+        <inertia>
+          <ixx>8.13816e-05</ixx>
+          <ixy>4.1016e-20</ixy>
+          <ixz>3.99266e-22</ixz>
+          <iyy>0.000114938</iyy>
+          <iyz>-6.00731e-07</iyz>
+          <izz>7.968e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name="lidar_collision">
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://bandit/meshes/visual/lidar.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="lidar_visual">
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://bandit/meshes/visual/lidar.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="torl" type="revolute">
+      <pose relative_to="base_link">0.07 -0.004 -0.03 1.5708 -0 0</pose>
+      <parent>base_link</parent>
+      <child>wheel_rl</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="wheel_rl">
+      <pose relative_to="torl">0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.019773 0 0 0 -0 0</pose>
+        <mass>0.095633</mass>
+        <inertia>
+          <ixx>5.1131e-05</ixx>
+          <ixy>2.4719e-23</ixy>
+          <ixz>5.4603e-22</ixz>
+          <iyy>3.8578e-05</iyy>
+          <iyz>1.6462e-38</iyz>
+          <izz>3.8578e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name="wheel_rl_collision">
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://bandit/meshes/visual/wheel_rl.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="wheel_rl_visual">
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://bandit/meshes/visual/wheel_rl.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="torr" type="revolute">
+      <pose relative_to="base_link">-0.07 -0.004 -0.03 -1.5708 0 -3.14159</pose>
+      <parent>base_link</parent>
+      <child>wheel_rr</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="wheel_rr">
+      <pose relative_to="torr">0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.019773 0 0 0 -0 0</pose>
+        <mass>0.095633</mass>
+        <inertia>
+          <ixx>5.1131e-05</ixx>
+          <ixy>2.4719e-23</ixy>
+          <ixz>5.4603e-22</ixz>
+          <iyy>3.8578e-05</iyy>
+          <iyz>1.6462e-38</iyz>
+          <izz>3.8578e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name="wheel_rr_collision">
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://bandit/meshes/visual/wheel_rr.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="wheel_rr_visual">
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>package://bandit/meshes/visual/wheel_rr.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

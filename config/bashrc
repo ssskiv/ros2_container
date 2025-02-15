@@ -22,3 +22,4 @@ test -f /developer/ros2_ws/install/setup.bash && \
     source /developer/ros2_ws/install/setup.bash
 test -f /developer/.host/.Xauthority && \
     cp -p /developer/.host/.Xauthority /developer/.Xauthority
+source /opt/ros/jazzy/setup.bash
