@@ -2,8 +2,8 @@
 <!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
      Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
-<robot
-  name="bandit">
+<robot 
+  name="bandit" xmlns:xacro="http://www.ros.org/wiki/xacro" > 
   <link
     name="base_link">
     <inertial>
@@ -23,7 +23,7 @@
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="-1.5708 0 0" />
+        rpy="-1.5708 0 3.1415" />
       <geometry>
         <mesh
           filename="package://bandit/meshes/visual/base_link.STL" />
@@ -45,10 +45,63 @@
     </collision>
   </link>
   <link
-    name="wheel_fr">
+    name="wheel_fl">
     <inertial>
       <origin
         xyz="0.019773 0 8.6736E-19"
+        rpy="0 0 0" />
+      <mass
+        value="0.095633" />
+      <inertia
+        ixx="5.1131E-05"
+        ixy="2.4719E-23"
+        ixz="5.4603E-22"
+        iyy="3.8578E-05"
+        iyz="1.6462E-38"
+        izz="3.8578E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://bandit/meshes/visual/wheel_fl.STL" />
+      </geometry>
+      <material
+        name="Gazebo/Red">
+        <!-- <color
+          rgba="0.46275 0.41569 0.58824 1" /> -->
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://bandit/meshes/visual/wheel_fl.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="tofl"
+    type="continuous">
+    <origin
+      xyz="-0.07 0.182 0.004"
+      rpy="0 0 3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="wheel_fl" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="wheel_fr">
+    <inertial>
+      <origin
+        xyz="0.019773 2.7756E-17 8.6736E-19"
         rpy="0 0 0" />
       <mass
         value="0.095633" />
@@ -88,120 +141,14 @@
     name="tofr"
     type="continuous">
     <origin
-      xyz="-0.07 -0.004 -0.182"
-      rpy="-1.5708 0 3.1416" />
+      xyz="0.07 0.182 0.004"
+      rpy="0 0 0" />
     <parent
       link="base_link" />
     <child
       link="wheel_fr" />
     <axis
-      xyz="1 0 0" />
-  </joint>
-  <link
-    name="wheel_fl">
-    <inertial>
-      <origin
-        xyz="0.019773 2.7756E-17 8.6736E-19"
-        rpy="0 0 0" />
-      <mass
-        value="0.095633" />
-      <inertia
-        ixx="5.1131E-05"
-        ixy="2.4719E-23"
-        ixz="5.4603E-22"
-        iyy="3.8578E-05"
-        iyz="1.6462E-38"
-        izz="3.8578E-05" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://bandit/meshes/visual/wheel_fl.STL" />
-      </geometry>
-      <material
-        name="wheel">
-        <color
-          rgba="0.46275 0.41569 0.58824 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://bandit/meshes/visual/wheel_fl.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="tofl"
-    type="continuous">
-    <origin
-      xyz="0.07 -0.004 -0.182"
-      rpy="1.5708 0 0" />
-    <parent
-      link="base_link" />
-    <child
-      link="wheel_fl" />
-    <axis
-      xyz="1 0 0" />
-  </joint>
-  <link
-    name="wheel_rl">
-    <inertial>
-      <origin
-        xyz="0.019773 0 8.6736E-19"
-        rpy="0 0 0" />
-      <mass
-        value="0.095633" />
-      <inertia
-        ixx="5.1131E-05"
-        ixy="2.4719E-23"
-        ixz="5.4603E-22"
-        iyy="3.8578E-05"
-        iyz="1.6462E-38"
-        izz="3.8578E-05" />
-    </inertial>
-    <visual>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://bandit/meshes/visual/wheel_rl.STL" />
-      </geometry>
-      <material
-        name="wheel">
-        <color
-          rgba="0.46275 0.41569 0.58824 1" />
-      </material>
-    </visual>
-    <collision>
-      <origin
-        xyz="0 0 0"
-        rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://bandit/meshes/visual/wheel_rl.STL" />
-      </geometry>
-    </collision>
-  </link>
-  <joint
-    name="torl"
-    type="continuous">
-    <origin
-      xyz="0.07 -0.004 -0.03"
-      rpy="1.5708 0 0" />
-    <parent
-      link="base_link" />
-    <child
-      link="wheel_rl" />
-    <axis
-      xyz="1 0 0" />
+      xyz="-1 0 0" />
   </joint>
   <link
     name="wheel_rr">
@@ -247,12 +194,65 @@
     name="torr"
     type="continuous">
     <origin
-      xyz="-0.07 -0.004 -0.03"
-      rpy="-1.5708 0 3.1416" />
+      xyz="0.07 0.03 0.004"
+      rpy="0 0 0" />
     <parent
       link="base_link" />
     <child
       link="wheel_rr" />
+    <axis
+      xyz="-1 0 0" />
+  </joint>
+  <link
+    name="wheel_rl">
+    <inertial>
+      <origin
+        xyz="0.019773 0 8.6736E-19"
+        rpy="0 0 0" />
+      <mass
+        value="0.095633" />
+      <inertia
+        ixx="5.1131E-05"
+        ixy="2.4719E-23"
+        ixz="5.4603E-22"
+        iyy="3.8578E-05"
+        iyz="1.6462E-38"
+        izz="3.8578E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://bandit/meshes/visual/wheel_rl.STL" />
+      </geometry>
+      <material
+        name="wheel">
+        <color
+          rgba="0.46275 0.41569 0.58824 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://bandit/meshes/visual/wheel_rl.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="torl"
+    type="continuous">
+    <origin
+      xyz="-0.07 0.03 0.004"
+      rpy="0 0 3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="wheel_rl" />
     <axis
       xyz="1 0 0" />
   </joint>
@@ -260,8 +260,8 @@
     name="lidar">
     <inertial>
       <origin
-        xyz="2.24637187158125E-17 0.0192733566292148 -0.000246290337557173"
-        rpy="0 0 0" />
+        xyz="2.24637187158125E-17 0.0192733566292148 -1.5707963267949"
+        rpy="1.5708 0 3.1415" />
       <mass
         value="0.170619184506016" />
       <inertia
@@ -275,7 +275,7 @@
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="1.5708 0 3.1415" />
       <geometry>
         <mesh
           filename="package://bandit/meshes/visual/lidar.STL" />
@@ -289,7 +289,7 @@
     <collision>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="1.5708 0 3.1415" />
       <geometry>
         <mesh
           filename="package://bandit/meshes/visual/lidar.STL" />
@@ -300,8 +300,8 @@
     name="tolidar"
     type="fixed">
     <origin
-      xyz="0 -0.059 -0.065"
-      rpy="3.1416 0 0" />
+      xyz="0 0.065 0.059"
+      rpy="0 0 0" />
     <parent
       link="base_link" />
     <child
@@ -314,7 +314,7 @@
     <inertial>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="0 0 3.1415" />
       <mass
         value="0" />
       <inertia
@@ -328,7 +328,7 @@
     <visual>
       <origin
         xyz="0 0 0"
-        rpy="0 0 0" />
+        rpy="0 0 3.1415" />
       <geometry>
         <mesh
           filename="package://bandit/meshes/visual/camera.STL" />
@@ -353,8 +353,8 @@
     name="tocamera"
     type="fixed">
     <origin
-      xyz="0 -0.1055 0.012"
-      rpy="1.5707963267949 0 0" />
+      xyz="0 -0.012 0.1055"
+      rpy="0 0 0" />
     <parent
       link="base_link" />
     <child
@@ -362,4 +362,30 @@
     <axis
       xyz="0 0 0" />
   </joint>
+  <gazebo reference='lidar'>
+    <sensor name='laser' type='ray'>
+      <pose> 0 0 0 0 0 0 </pose>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+          <scan>
+              <horizontal>
+                  <samples>360</samples>
+                  <min_angle>-3.14</min_angle>
+                  <max_angle>3.14</max_angle>
+              </horizontal>
+          </scan>
+          <range>
+              <min>0.3</min>
+              <max>12</max>
+          </range>
+      </ray>
+      <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+          <ros>
+              <argument>~/out:=scan</argument>
+          </ros>
+          <output_type>sensor_msgs/LaserScan</output_type>
+          <frame_name>laser_frame</frame_name>
+     </sensor>
+  </gazebo>
 </robot>

@@ -88,6 +88,8 @@ def generate_launch_description():
             "0",
             "-z",
             "2.0",
+            '-X',
+            '1.57'
         ],
         output="screen",
     )
