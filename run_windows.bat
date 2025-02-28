@@ -6,9 +6,7 @@ set "IMAGE=hzrob"
 set "TEAM_NAME=hzrob"
 set "FLAVOR=test"
 set "USERNAME=developer"
-set "ROBOT_PANEL_PORT=8008"
 set "VS_PORT=31415"
-set "WEBOTS_STREAM_PORT=1234"
 set "DOCKER_DIR=%~dp0"
 set "PROJECT_DIR=%~dp0"
 
@@ -30,7 +28,6 @@ if "%1"=="run" goto run
 if "%1"=="test-nvidia" goto test-nvidia
 if "%1"=="setup-environment" goto setup-environment
 if "%1"=="wsl-fix" goto wsl-fix
-if "%1"=="copy-working-folders" goto copy-working-folders
 if "%1"=="start-code-server" goto start-code-server
 if "%1"=="stop-code-server" goto stop-code-server
 if "%1"=="exec" goto exec
@@ -49,7 +46,7 @@ docker run --ipc=host ^
      --name %IMAGE%-%FLAVOR% ^
      --privileged ^
      --restart unless-stopped ^
-      -p %ROBOT_PANEL_PORT%:8008 -p %VS_PORT%:31415 -p %WEBOTS_STREAM_PORT%:1234 ^
+     -p %VS_PORT%:31415 ^
       -e NVIDIA_DRIVER_CAPABILITIES=all %NVIDIA_GPU% ^
       -e DISPLAY=host.docker.internal:0 ^
       -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY ^
@@ -80,8 +77,6 @@ if exist "%ProgramFiles%/NVIDIA Corporation/NVSMI/nvidia-smi.exe" (
 goto end
 
 :setup-environment
-docker exec -it %IMAGE%-%FLAVOR% ln -s /%USERNAME%/repositories/webots_ros2_suv /%USERNAME%/ros2_ws/src/webots_ros2_suv
-docker exec -it %IMAGE%-%FLAVOR% ln -s /%USERNAME%/repositories/robot_interfaces /%USERNAME%/ros2_ws/src/robot_interfaces
 docker exec -it %IMAGE%-%FLAVOR% mkdir /%USERNAME%/ros2_ws/data
 docker exec -it %IMAGE%-%FLAVOR% mkdir /%USERNAME%/ros2_ws/data/paths
 goto end
@@ -92,20 +87,9 @@ echo export LD_LIBRARY_PATH=/usr/lib/wsl/lib >> C:\Windows\Temp\.bashrc
 echo export DISPLAY=host.docker.internal:0 >> C:\Windows\Temp\.bashrc
 echo export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA >> C:\Windows\Temp\.bashrc
 docker cp C:\Windows\Temp\.bashrc %IMAGE%-%FLAVOR%:/%USERNAME%/.bashrc
-docker exec -it %IMAGE%-%FLAVOR% sudo sed -i -e "s|return 'microsoft-standard' in uname().release|return False|" /opt/ros/humble/local/lib/python3.10/dist-packages/webots_ros2_driver/utils.py
 docker exec -it %IMAGE%-%FLAVOR% sudo sed -i "s/\r$//g" /%USERNAME%/.bashrc
 
 
-goto end
-
-:copy-working-folders
-if exist "%PROJECT_DIR%/projects/%FLAVOR%" (
-    echo project dir exists. Remove it first
-) else (
-    mkdir "%PROJECT_DIR%/projects/%FLAVOR%"
-    xcopy "%PROJECT_DIR%/webots_ros2_suv" "%PROJECT_DIR%/projects/%FLAVOR%/webots_ros2_suv" /E /H /K
-    xcopy "%PROJECT_DIR%/robot_interfaces" "%PROJECT_DIR%/projects/%FLAVOR%/robot_interfaces" /E /H /K
-)
 goto end
 
 :start-code-server
